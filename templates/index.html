@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朝のニュースまとめ - 生成AI & 美容業界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .refresh-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .refresh-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .news-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+        
+        .news-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .news-item h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .news-item .summary {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .news-item .url {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        .news-item .url:hover {
+            text-decoration: underline;
+        }
+        
+        .importance-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌅 朝のニュースまとめ</h1>
+            <p class="last-updated" id="lastUpdated">
+                {% if data.last_updated %}
+                    最終更新: {{ data.last_updated }}
+                {% else %}
+                    まだ更新されていません
+                {% endif %}
+            </p>
+            <button class="refresh-btn" onclick="refreshNews()" id="refreshBtn">
+                🔄 今すぐ更新
+            </button>
+        </header>
+        
+        <div class="section">
+            <h2><span class="emoji">🤖</span>生成AIの最新トレンド</h2>
+            <div id="aiNews">
+                {% if data.ai_news %}
+                    {% for news in data.ai_news %}
+                    <div class="news-item">
+                        <h3>
+                            {{ news.title }}
+                            <span class="importance-badge">重要度: {{ news.importance }}</span>
+                        </h3>
+                        <p class="summary">{{ news.summary }}</p>
+                        <a href="{{ news.url }}" target="_blank" class="url">📰 記事を読む</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="loading">ニュースを読み込んでいます...</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><span class="emoji">💄</span>美容業界の最新情報</h2>
+            <div id="beautyNews">
+                {% if data.beauty_news %}
+                    {% for news in data.beauty_news %}
+                    <div class="news-item">
+                        <h3>
+                            {{ news.title }}
+                            <span class="importance-badge">重要度: {{ news.importance }}</span>
+                        </h3>
+                        <p class="summary">{{ news.summary }}</p>
+                        <a href="{{ news.url }}" target="_blank" class="url">📰 記事を読む</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="loading">ニュースを読み込んでいます...</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function refreshNews() {
+            const btn = document.getElementById('refreshBtn');
+            btn.disabled = true;
+            btn.textContent = '更新中...';
+            
+            fetch('/api/refresh')
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('更新に失敗しました');
+                    btn.disabled = false;
+                    btn.textContent = '🔄 今すぐ更新';
+                });
+        }
+        
+        // 自動リロード（オプション）
+        // setInterval(() => location.reload(), 300000); // 5分ごと
+    </script>
+</body>
+</html>

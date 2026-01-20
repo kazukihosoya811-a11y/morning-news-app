@@ -1,0 +1,43 @@
+{
+  "last_updated": "2026年01月17日 17:22",
+  "ai_news": [
+    {
+      "title": "Google、新型AI「Gemini 2.0」を発表 - マルチモーダル性能が大幅向上",
+      "summary": "Googleは最新の大規模言語モデル「Gemini 2.0」を発表。テキスト、画像、音声、動画を統合的に処理できるマルチモーダル機能が大幅に強化され、従来モデルと比較して推論速度が2倍に向上。企業向けAPI提供も開始され、日本市場での活用が期待される。",
+      "url": "https://www.example.jp/ai-news/gemini-2-0",
+      "importance": 1
+    },
+    {
+      "title": "OpenAI、ChatGPT Enterpriseに新機能追加 - 日本企業の導入加速",
+      "summary": "企業向けChatGPTに、社内データの安全な学習機能とカスタマイズ可能なワークフロー機能が追加。三菱UFJ銀行や楽天など、日本の大手企業での導入事例が相次いで報告されている。データプライバシーとセキュリティ面での強化が評価されている。",
+      "url": "https://www.example.jp/ai-news/chatgpt-enterprise",
+      "importance": 2
+    },
+    {
+      "title": "Stability AI、日本語特化の画像生成モデル「Stable Diffusion JP」をリリース",
+      "summary": "日本文化やアニメスタイルに特化した画像生成AI「Stable Diffusion JP」が正式リリース。日本語プロンプトの理解精度が大幅に向上し、漫画やイラスト制作での活用が進む。クリエイター向けの商用ライセンスも提供開始。",
+      "url": "https://www.example.jp/ai-news/stable-diffusion-jp",
+      "importance": 3
+    }
+  ],
+  "beauty_news": [
+    {
+      "title": "資生堂、AI肌診断サービスを全国展開 - パーソナライズ化粧品の提案が可能に",
+      "summary": "資生堂が開発したAI肌診断システムが全国の店舗で利用可能に。スマートフォンで撮影した肌画像から、シミ、シワ、毛穴などを詳細に分析し、個人に最適な化粧品を提案。既に10万人以上が利用し、顧客満足度90%を達成している。",
+      "url": "https://www.example.jp/beauty-news/shiseido-ai-diagnosis",
+      "importance": 1
+    },
+    {
+      "title": "K-Beauty市場が日本で急成長 - 2024年市場規模3000億円突破へ",
+      "summary": "韓国発の美容製品「K-Beauty」が日本市場で急拡大。特にスキンケア製品の人気が高く、百貨店やドラッグストアでの取り扱いが増加。SNSでの口コミ効果もあり、若年層を中心に支持を集めている。業界関係者は今後も成長が続くと予測。",
+      "url": "https://www.example.jp/beauty-news/k-beauty-growth",
+      "importance": 2
+    },
+    {
+      "title": "メンズ美容市場が過去最高を記録 - 男性向けスキンケア製品の需要急増",
+      "summary": "男性向け美容製品市場が前年比25%増の1500億円に到達。在宅勤務の増加やオンライン会議の普及により、男性の美容意識が高まっている。特にスキンケアと眉毛ケア製品の売上が顕著に伸びており、各メーカーが新製品を相次いで投入。",
+      "url": "https://www.example.jp/beauty-news/mens-beauty-record",
+      "importance": 3
+    }
+  ]
+}
